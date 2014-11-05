@@ -39,6 +39,7 @@ env:
     - HOSTCC="cc"
     - HOSTCXX="c++"
     - TEST_CONFIG_CMD=""
+    - secure: "plp1hCCNNinXPGvtsXeOLVGg8zFmhr5NtJweGj+wRJdxJbl4pJtksM1qDZs+VMWpGQSLwwmSIHEIrNDt+RCjg+49OmCnPeTNH+U73hPHHEL+cIj+MG97KR4IlDi3xFRGVqv1ukof85ZaONfa8tL6HZeU4gJYvdl3APK79FdHTyM="
 
 before_script:
   # install toolchains based on INSTALL_TOOLCHAIN} variable
@@ -218,3 +219,13 @@ notifications:
   email: false
 
 # TODO make it perfect ;-r
+
+addons:
+  coverity_scan:
+    project:
+      name: "danielschwierzeck/u-boot"
+      description: "U-Boot for Lantiq SoC devices"
+    notification_email: daniel.schwierzeck@gmail.com
+    build_command_prepend: "make sandbox_defconfig"
+    build_command:   "make -j4"
+    branch_pattern: coverity_scan
