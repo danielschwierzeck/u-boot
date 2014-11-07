@@ -900,7 +900,7 @@ int do_fat_read_at(const char *filename, loff_t pos, void *buffer,
 		filename++;
 
 	/* Make a copy of the filename and convert it to lowercase */
-	strcpy(fnamecopy, filename);
+	snprintf(fnamecopy, sizeof(fnamecopy), "%s", filename);
 	downcase(fnamecopy);
 
 root_reparse:
