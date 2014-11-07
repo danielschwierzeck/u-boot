@@ -336,7 +336,11 @@ int os_dirent_ls(const char *dirname, struct os_dirent_node **headp)
 
 	for (node = head = NULL;; node = next) {
 		ret = readdir_r(dir, &entry, &result);
-		if (ret || !result)
+		if (ret) {
+			os_dirent_free(head);
+			goto done;
+		}
+		if (!result)
 			break;
 		next = malloc(sizeof(*node) + strlen(entry.d_name) + 1);
 		if (!next) {
@@ -369,6 +373,9 @@ int os_dirent_ls(const char *dirname, struct os_dirent_node **headp)
 	*headp = head;
 
 done:
+	if (fname)
+		free(fname);
+
 	closedir(dir);
 	free(fname);
 	return ret;
