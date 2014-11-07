@@ -243,7 +243,7 @@ int fdt_initrd(void *fdt, ulong initrd_start, ulong initrd_end)
 	 * the entry, we will j be the next available slot.
 	 */
 	for (j = 0; j < total; j++) {
-		err = fdt_get_mem_rsv(fdt, j, &addr, &size);
+		fdt_get_mem_rsv(fdt, j, &addr, &size);
 		if (addr == initrd_start) {
 			fdt_del_mem_rsv(fdt, j);
 			break;
