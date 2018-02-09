@@ -33,7 +33,7 @@ class MyHTMLParser(HTMLParser):
         HTMLParser.__init__(self)
         self.arch_link = None
         self.links = []
-        self._match = '_%s-' % arch
+        self.re_arch = re.compile('[-_]%s-' % arch)
 
     def handle_starttag(self, tag, attrs):
         if tag == 'a':
@@ -41,7 +41,7 @@ class MyHTMLParser(HTMLParser):
                 if tag == 'href':
                     if value and value.endswith('.xz'):
                         self.links.append(value)
-                        if self._match in value:
+                        if self.re_arch.search(value):
                             self.arch_link = value
 
 
@@ -431,7 +431,7 @@ class Toolchains:
         """
         arch = command.OutputOneLine('uname', '-m')
         base = 'https://www.kernel.org/pub/tools/crosstool/files/bin'
-        versions = ['4.9.0', '4.6.3', '4.6.2', '4.5.1', '4.2.4']
+        versions = ['6.4.0', '5.5.0', '4.9.4', '4.9.0', '4.6.3', '4.6.2', '4.5.1', '4.2.4']
         links = []
         for version in versions:
             url = '%s/%s/%s/' % (base, arch, version)
