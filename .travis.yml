@@ -27,6 +27,10 @@ addons:
     - rpm2cpio
     - wget
     - device-tree-compiler
+    - libisl15
+    - libmpc3
+    - libmpfr4
+    - libgmp10
 
 install:
  # Clone uboot-test-hooks
