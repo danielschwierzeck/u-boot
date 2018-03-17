@@ -28,6 +28,10 @@ addons:
     - wget
     - device-tree-compiler
     - lzop
+    - libisl15
+    - libmpc3
+    - libmpfr4
+    - libgmp10
 
 install:
  # Clone uboot-test-hooks
